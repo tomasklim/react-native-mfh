@@ -1,0 +1,43 @@
+{
+  "name": "react-native-mfh",
+  "author": "Tomáš Klíma",
+  "license": "MIT",
+  "main": "node_modules/expo/AppEntry.js",
+  "private": true,
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "eject": "expo eject",
+    "flow start": "flow start",
+    "flow stop": "flow stop",
+    "flow status": "flow status",
+    "flow coverage": "flow coverage",
+    "test": "jest --config=.jest.json"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "expo": "^30.0.1",
+    "react": "16.3.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
+    "react-navigation": "^2.18.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^10.0.1",
+    "babel-preset-flow": "^6.23.0",
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb": "17.1.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-flowtype": "^3.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-react": "^7.11.0",
+    "flow-bin": "^0.83.0",
+    "jest": "^23.6.0",
+    "prettier": "^1.14.3",
+    "prettier-eslint": "^8.8.2",
+    "react-test-renderer": "^16.5.2"
+  }
+}
