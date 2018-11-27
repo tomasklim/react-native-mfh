@@ -1,31 +1,35 @@
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation'
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/Ionicons'
 import React from 'react'
+import { Text } from 'react-native'
 import Colors from '../themes/Colors'
 
 export default class MainNavigator {
-  static createAppContainer = (Home, Search) => {
+  static createAppContainer = (Home, Search, Menu) => {
     const TabNavigator = createBottomTabNavigator(
       {
         Home,
         Search,
+        Menu,
       },
       {
         defaultNavigationOptions: ({ navigation }) => ({
-          tabBarIcon: ({ focused, horizontal, tintColor }) => {
+          tabBarIcon: ({ focused }) => {
             const { routeName } = navigation.state
             let iconName
             if (routeName === 'Home') {
-              iconName = `ios-home${focused ? '' : '-outline'}`
+              iconName = `md-home`
             } else if (routeName === 'Search') {
-              iconName = `ios-search${focused ? '' : '-outline'}`
+              iconName = `md-search`
+            } else if (routeName === 'Menu') {
+              iconName = `md-menu`
             }
 
             return (
-              <Ionicons
+              <Icon
                 name={iconName}
-                size={horizontal ? 20 : 25}
-                color={tintColor}
+                size={35}
+                color={focused ? Colors.purpleActive : Colors.purpleInactive}
               />
             )
           },
@@ -33,6 +37,12 @@ export default class MainNavigator {
         tabBarOptions: {
           activeTintColor: Colors.purpleActive,
           inactiveTintColor: Colors.purpleInactive,
+          style: {
+            backgroundColor: Colors.black,
+          },
+          labelStyle: {
+            fontSize: 13,
+          },
         },
       },
     )

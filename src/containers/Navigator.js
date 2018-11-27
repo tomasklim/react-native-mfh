@@ -1,14 +1,23 @@
 import { createStackNavigator } from 'react-navigation'
-import RootContainer from './RootContainer'
+import Home from './Home'
 import TabNavigator from './TabNavigator'
-import SearchContainer from './SearchContainer'
+import Search from './Search'
+import Menu from './Menu'
 
 const HomeNavigator = createStackNavigator({
-  Home: RootContainer,
+  Home,
 })
 
 const SearchNavigator = createStackNavigator({
-  Search: SearchContainer,
+  Search,
 })
 
-export default TabNavigator.createAppContainer(HomeNavigator, SearchNavigator)
+const MenuNavigator = createStackNavigator({
+  Menu,
+})
+
+export default TabNavigator.createAppContainer(
+  HomeNavigator,
+  SearchNavigator,
+  MenuNavigator,
+)
