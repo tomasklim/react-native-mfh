@@ -1,8 +1,8 @@
 import { createStackNavigator } from 'react-navigation'
-import Home from './Home'
+import Home from '../Home'
 import TabNavigator from './TabNavigator'
-import Search from './Search'
-import Menu from './Menu'
+import Search from '../Search'
+import Menu from '../Menu'
 
 const HomeNavigator = createStackNavigator({
   Home,

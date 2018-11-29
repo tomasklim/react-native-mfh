@@ -1,8 +1,7 @@
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
 import React from 'react'
-import { Text } from 'react-native'
-import Colors from '../themes/Colors'
+import Colors from '../../themes/Colors'
 
 export default class MainNavigator {
   static createAppContainer = (Home, Search, Menu) => {
