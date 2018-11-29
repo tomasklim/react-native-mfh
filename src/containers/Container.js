@@ -19,7 +19,7 @@ export default class Container extends React.PureComponent<null> {
     const { children } = this.props
     return (
       <SafeAreaView style={styles.outerWrapper}>
-        <StatusBar backgroundColor="blue" barStyle="light-content" />
+        <StatusBar barStyle="light-content" />
         <View style={styles.container}>{children}</View>
       </SafeAreaView>
     )
