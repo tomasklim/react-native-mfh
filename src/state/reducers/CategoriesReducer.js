@@ -1,10 +1,10 @@
-import { ON_GET_MOVIES } from '../ActionConstants'
+import { ON_GET_MOVIES } from '../../constants/ActionConstants'
 
 export const initialState = {
   items: [],
 }
 
-export const TestReducer = (state = initialState, action) => {
+export const CategoriesReducer = (state = initialState, action) => {
   switch (action.type) {
     case ON_GET_MOVIES:
       return {

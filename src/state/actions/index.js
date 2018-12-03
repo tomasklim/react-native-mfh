@@ -1,1 +1,1 @@
-export { onGetMovies } from './TestActions'
+export { onGetMovies } from './CategoriesActions'

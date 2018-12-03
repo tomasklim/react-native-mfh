@@ -1,3 +1,5 @@
+import axios from '../../utils/helpers'
+
 export const onGetMovies = movies => ({
   type: 'ON_GET_MOVIES',
   movies,

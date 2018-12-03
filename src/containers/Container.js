@@ -35,7 +35,7 @@ class Container extends React.PureComponent<Props> {
 }
 
 const mapStateToProps = state => ({
-  movies: state.test.items,
+  movies: state.categories.items,
 })
 
 const mapDispatchToProps = {
