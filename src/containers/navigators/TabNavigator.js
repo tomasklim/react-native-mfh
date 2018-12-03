@@ -34,13 +34,14 @@ export default class MainNavigator {
           },
         }),
         tabBarOptions: {
+          showLabel: false,
           activeTintColor: Colors.purpleActive,
           inactiveTintColor: Colors.purpleInactive,
           style: {
             backgroundColor: Colors.black,
           },
           labelStyle: {
-            fontSize: 13,
+            fontSize: 12,
           },
         },
       },

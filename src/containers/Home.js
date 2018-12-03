@@ -1,7 +1,9 @@
 import React from 'react'
 import { StyleSheet, Text } from 'react-native'
+import { connect } from 'react-redux'
 import Colors from '../themes/Colors'
 import Container from './Container'
+import { HeaderImage } from '../components'
 
 const styles = StyleSheet.create({
   text: {
@@ -9,13 +11,9 @@ const styles = StyleSheet.create({
   },
 })
 
-export default class Home extends React.PureComponent<null> {
+class Home extends React.PureComponent<null> {
   static navigationOptions = {
-    title: 'Home',
-    headerTintColor: Colors.purpleInactive,
-    headerTitleStyle: {
-      fontWeight: 'bold',
-    },
+    headerTitle: <HeaderImage />,
     headerStyle: {
       backgroundColor: Colors.black,
       borderBottomColor: Colors.purpleInactive,
@@ -30,3 +28,14 @@ export default class Home extends React.PureComponent<null> {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  movies: state.categories.items,
+})
+
+const mapDispatchToProps = {}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Home)
