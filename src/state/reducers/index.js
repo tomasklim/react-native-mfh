@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux'
-import { CategoriesReducer } from './CategoriesReducer'
+import LookupReducer from './LookupReducer'
+import CategoriesReducer from './CategoriesReducer'
 
 const rootReducer = combineReducers({
+  lookup: LookupReducer,
   categories: CategoriesReducer,
 })
 

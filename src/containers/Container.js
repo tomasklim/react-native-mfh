@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
-    paddingHorizontal: 20,
     paddingTop: 70,
   },
 })
@@ -34,9 +33,7 @@ class Container extends React.PureComponent<Props> {
   }
 }
 
-const mapStateToProps = state => ({
-  movies: state.categories.items,
-})
+const mapStateToProps = state => ({})
 
 const mapDispatchToProps = {
   onGetMovies,

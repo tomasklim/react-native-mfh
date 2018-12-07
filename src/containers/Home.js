@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import Colors from '../themes/Colors'
 import Container from './Container'
 import { HeaderImage } from '../components'
-import { onGetCategoriesRequest } from '../state/actions'
+import { onGetCategoriesLookupRequest } from '../state/actions'
+import ItemGroupRow from './ItemGroupRow'
 
 const styles = StyleSheet.create({
   text: {
@@ -22,20 +23,33 @@ class Home extends React.PureComponent<null> {
   }
 
   componentDidMount() {
-    const { onGetCategoriesRequest } = this.props
-    onGetCategoriesRequest()
+    const { onGetCategoriesLookupRequest } = this.props
+    onGetCategoriesLookupRequest()
   }
 
   render() {
-    const { loading, categories } = this.props
+    const { lookupCategories } = this.props
     return (
       <Container>
-        {loading && (
+        {lookupCategories.isFetching && (
           <ActivityIndicator
-            animating={loading}
+            animating={lookupCategories.isFetching}
             size="large"
             color={Colors.purpleInactive}
           />
+        )}
+        {!lookupCategories.loading && lookupCategories.data && (
+          <ScrollView>
+            {Object.keys(lookupCategories.data).map(slug => {
+              const lookupCategory = lookupCategories.data[slug]
+
+              if (lookupCategory && lookupCategory.hideFromMain) {
+                return null
+              }
+
+              return <ItemGroupRow slug key={slug} />
+            })}
+          </ScrollView>
         )}
       </Container>
     )
@@ -43,12 +57,11 @@ class Home extends React.PureComponent<null> {
 }
 
 const mapStateToProps = state => ({
-  loading: state.categories.loading,
-  categories: state.categories.data,
+  lookupCategories: state.lookup.categories,
 })
 
 const mapDispatchToProps = {
-  onGetCategoriesRequest,
+  onGetCategoriesLookupRequest,
 }
 
 export default connect(

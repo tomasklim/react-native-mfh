@@ -1,6 +1,7 @@
 import { combineEpics } from 'redux-observable'
-import { categoriesRequestEpic } from './CategoriesEpics'
+import categoriesLookupRequestEpic from './LookupEpics'
+import categoriesRequestEpic from './CategoriesEpics'
 
-const rootEpic = combineEpics(categoriesRequestEpic)
+const rootEpic = combineEpics(categoriesLookupRequestEpic)
 
 export default rootEpic
