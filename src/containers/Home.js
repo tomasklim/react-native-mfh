@@ -1,9 +1,10 @@
 import React from 'react'
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet, ActivityIndicator, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import Colors from '../themes/Colors'
 import Container from './Container'
 import { HeaderImage } from '../components'
+import { onGetCategoriesRequest } from '../state/actions'
 
 const styles = StyleSheet.create({
   text: {
@@ -20,20 +21,35 @@ class Home extends React.PureComponent<null> {
     },
   }
 
+  componentDidMount() {
+    const { onGetCategoriesRequest } = this.props
+    onGetCategoriesRequest()
+  }
+
   render() {
+    const { loading, categories } = this.props
     return (
       <Container>
-        <Text style={styles.text}>a</Text>
+        {loading && (
+          <ActivityIndicator
+            animating={loading}
+            size="large"
+            color={Colors.purpleInactive}
+          />
+        )}
       </Container>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  movies: state.categories.items,
+  loading: state.categories.loading,
+  categories: state.categories.data,
 })
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+  onGetCategoriesRequest,
+}
 
 export default connect(
   mapStateToProps,
