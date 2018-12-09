@@ -1,14 +1,10 @@
 import React from 'react'
-import {
-  StyleSheet,
-  Text,
-  ActivityIndicator,
-  FlatList,
-  View,
-} from 'react-native'
+import { StyleSheet, Text, FlatList, View } from 'react-native'
 import { connect } from 'react-redux'
 import { Card } from 'react-native-elements'
 import Colors from '../themes/Colors'
+import { onGetCategoriesRequest } from '../state/actions'
+import { FETCH_STATUS } from '../constants/ActionConstants'
 
 const styles = StyleSheet.create({
   text: {
@@ -45,11 +41,12 @@ const data = [
 
 class ItemGroupRow extends React.PureComponent<null> {
   componentDidMount() {
-    // const { onGetCategoriesLookupRequest } = this.props
+    const { lookupCategory, onGetCategoriesRequest } = this.props
+    // TODO categories fetching check
+    onGetCategoriesRequest(lookupCategory.id)
   }
 
   render() {
-    const { loading } = this.props
     return (
       <View
         style={{
@@ -76,9 +73,13 @@ class ItemGroupRow extends React.PureComponent<null> {
   }
 }
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({
+  categories: state.categories,
+})
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+  onGetCategoriesRequest,
+}
 
 export default connect(
   mapStateToProps,

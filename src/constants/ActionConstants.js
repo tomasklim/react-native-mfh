@@ -1,4 +1,9 @@
-// TestActions
+export const FETCH_STATUS = {
+  NONE: 'NONE',
+  LOADING: 'LOADING',
+  SUCCESS: 'SUCCESS',
+  FAIL: 'FAIL',
+}
 
 export const ON_GET_CATEGORIES_LOOKUP_REQUEST =
   'ON_GET_CATEGORIES_LOOKUP_REQUEST'

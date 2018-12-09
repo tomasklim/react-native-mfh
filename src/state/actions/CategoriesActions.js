@@ -4,16 +4,23 @@ import {
   ON_GET_CATEGORIES_FAIL,
 } from '../../constants/ActionConstants'
 
-export const onGetCategoriesRequest = () => ({
+const onGetCategoriesRequest = id => ({
   type: ON_GET_CATEGORIES_REQUEST,
+  id,
 })
 
-export const onGetCategoriesSuccess = data => ({
-  type: ON_GET_CATEGORIES_SUCCESS,
-  data,
-})
+const onGetCategoriesSuccess = (id, data) => (
+  {
+    type: ON_GET_CATEGORIES_SUCCESS,
+    id,
+    data,
+  }
+)
 
-export const onGetCategoriesFail = error => ({
+const onGetCategoriesFail = (id, error) => ({
   type: ON_GET_CATEGORIES_FAIL,
+  id,
   error,
 })
+
+export const onGetCategories = null

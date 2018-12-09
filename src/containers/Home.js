@@ -1,11 +1,13 @@
 import React from 'react'
 import { StyleSheet, ActivityIndicator, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import Colors from '../themes/Colors'
 import Container from './Container'
 import { HeaderImage } from '../components'
-import { onGetCategoriesLookupRequest } from '../state/actions'
 import ItemGroupRow from './ItemGroupRow'
+import { FETCH_STATUS } from '../constants/ActionConstants'
+import * as actions from '../state/actions'
 
 const styles = StyleSheet.create({
   text: {
@@ -23,22 +25,23 @@ class Home extends React.PureComponent<null> {
   }
 
   componentDidMount() {
-    const { onGetCategoriesLookupRequest } = this.props
-    onGetCategoriesLookupRequest()
+    const { onGetCategoriesLookup } = this.props
+    onGetCategoriesLookup()
+    // onGetCategoriesRequest('myfilmhouse-newreleases')
   }
 
   render() {
     const { lookupCategories } = this.props
     return (
       <Container>
-        {lookupCategories.isFetching && (
+        {lookupCategories.status === FETCH_STATUS.LOADING && (
           <ActivityIndicator
             animating={lookupCategories.isFetching}
             size="large"
             color={Colors.purpleInactive}
           />
         )}
-        {!lookupCategories.loading && lookupCategories.data && (
+        {/* lookupCategories.status === FETCH_STATUS.SUCCESS && (
           <ScrollView>
             {Object.keys(lookupCategories.data).map(slug => {
               const lookupCategory = lookupCategories.data[slug]
@@ -47,10 +50,10 @@ class Home extends React.PureComponent<null> {
                 return null
               }
 
-              return <ItemGroupRow slug key={slug} />
+              return <ItemGroupRow lookupCategory={lookupCategory} key={slug} />
             })}
           </ScrollView>
-        )}
+          ) */}
       </Container>
     )
   }
@@ -60,9 +63,12 @@ const mapStateToProps = state => ({
   lookupCategories: state.lookup.categories,
 })
 
-const mapDispatchToProps = {
-  onGetCategoriesLookupRequest,
-}
+const mapDispatchToProps = dispatch => ({
+  onGetCategoriesLookup: bindActionCreators(
+    actions.onGetCategoriesLookup,
+    dispatch,
+  ),
+})
 
 export default connect(
   mapStateToProps,

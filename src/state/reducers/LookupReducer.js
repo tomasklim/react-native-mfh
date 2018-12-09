@@ -2,6 +2,7 @@ import {
   ON_GET_CATEGORIES_LOOKUP_REQUEST,
   ON_GET_CATEGORIES_LOOKUP_SUCCESS,
   ON_GET_CATEGORIES_LOOKUP_FAIL,
+  FETCH_STATUS,
 } from '../../constants/ActionConstants'
 import {
   extractCarouselsMetadata,
@@ -9,8 +10,7 @@ import {
 } from '../../utils/helpers'
 
 const initialContentCategories = {
-  isFetching: false,
-  timestamp: 0,
+  status: FETCH_STATUS.NONE,
   error: '',
   data: [],
   region: '',
@@ -25,22 +25,19 @@ function contentCategories(
     case ON_GET_CATEGORIES_LOOKUP_REQUEST:
       return {
         ...state,
-        isFetching: true,
-        error: '',
+        status: FETCH_STATUS.LOADING,
       }
     case ON_GET_CATEGORIES_LOOKUP_SUCCESS:
       return {
         ...state,
-        isFetching: false,
-        error: '',
         data: extractMetadata(action.data),
+        status: FETCH_STATUS.SUCCESS,
       }
     case ON_GET_CATEGORIES_LOOKUP_FAIL:
       return {
         ...state,
-        isFetching: false,
         error: action.error,
-        data: [],
+        status: FETCH_STATUS.FAIL,
       }
     default:
       return state
@@ -51,16 +48,45 @@ const initialState = {
   carousels: {},
   categories: {},
   genres: {},
+  status: FETCH_STATUS.NONE,
 }
 
 const LookupReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ON_GET_CATEGORIES_LOOKUP_SUCCESS:
-    case ON_GET_CATEGORIES_LOOKUP_FAIL:
     case ON_GET_CATEGORIES_LOOKUP_REQUEST:
       return {
         ...state,
-        loading: false,
+        status: FETCH_STATUS.LOADING,
+        carousels: contentCategories(
+          state.carousels,
+          action,
+          extractCarouselsMetadata,
+        ),
+        categories: contentCategories(
+          state.categories,
+          action,
+          extractCategoriesMetadata,
+        ),
+      }
+    case ON_GET_CATEGORIES_LOOKUP_SUCCESS:
+      return {
+        ...state,
+        status: FETCH_STATUS.SUCCESS,
+        carousels: contentCategories(
+          state.carousels,
+          action,
+          extractCarouselsMetadata,
+        ),
+        categories: contentCategories(
+          state.categories,
+          action,
+          extractCategoriesMetadata,
+        ),
+      }
+    case ON_GET_CATEGORIES_LOOKUP_FAIL:
+      return {
+        ...state,
+        status: FETCH_STATUS.FAIL,
         carousels: contentCategories(
           state.carousels,
           action,
