@@ -2,6 +2,7 @@
 
 // react
 import React from 'react'
+import { Font } from 'expo'
 
 // redux
 import { Provider } from 'react-redux'
@@ -33,13 +34,27 @@ const store = createStore(
 const persistor = persistStore(store)
 
 export default class App extends React.PureComponent<null> {
+  state = { fontLoaded: false }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      'Gotham-Medium': require('./assets/fonts/gotham-medium.ttf'),
+    })
+    await Font.loadAsync({
+      'Gotham-Book': require('./assets/fonts/gotham-book.ttf'),
+    })
+    this.setState({ fontLoaded: true })
+  }
+
   render() {
-    return (
+    const { fontLoaded } = this.state
+
+    return fontLoaded ? (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <Navigator />
         </PersistGate>
       </Provider>
-    )
+    ) : null
   }
 }

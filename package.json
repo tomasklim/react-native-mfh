@@ -4,6 +4,11 @@
   "license": "MIT",
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
+  },
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",

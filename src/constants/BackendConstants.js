@@ -1,4 +1,5 @@
 const API_URL = 'https://stgapi.myfilmhouse.ng'
+export const ARTWORK_URL = 'https://artwork.flyprivate.info/artwork'
 export const PLATFORM_ID = 'myfilmhouse'
 export const WEB_LANG = 'en'
 

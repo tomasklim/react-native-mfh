@@ -1,10 +1,7 @@
 // @flow
 import React from 'react'
 import { SafeAreaView, View, StyleSheet, StatusBar } from 'react-native'
-import { connect } from 'react-redux'
 import Colors from '../themes/Colors'
-
-import { onGetMovies } from '../state/actions'
 
 const styles = StyleSheet.create({
   outerWrapper: {
@@ -13,7 +10,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
-    paddingTop: 70,
+    paddingTop: 10,
   },
 })
 
@@ -33,13 +30,4 @@ class Container extends React.PureComponent<Props> {
   }
 }
 
-const mapStateToProps = state => ({})
-
-const mapDispatchToProps = {
-  onGetMovies,
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Container)
+export default Container

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, ActivityIndicator, ScrollView } from 'react-native'
+import { ActivityIndicator, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Colors from '../themes/Colors'
@@ -8,12 +8,6 @@ import { HeaderImage } from '../components'
 import ItemGroupRow from './ItemGroupRow'
 import { FETCH_STATUS } from '../constants/ActionConstants'
 import * as actions from '../state/actions'
-
-const styles = StyleSheet.create({
-  text: {
-    color: Colors.purpleInactive,
-  },
-})
 
 class Home extends React.PureComponent<null> {
   static navigationOptions = {
@@ -27,7 +21,6 @@ class Home extends React.PureComponent<null> {
   componentDidMount() {
     const { onGetCategoriesLookup } = this.props
     onGetCategoriesLookup()
-    // onGetCategoriesRequest('myfilmhouse-newreleases')
   }
 
   render() {
@@ -41,7 +34,8 @@ class Home extends React.PureComponent<null> {
             color={Colors.purpleInactive}
           />
         )}
-        {/* lookupCategories.status === FETCH_STATUS.SUCCESS && (
+
+        {lookupCategories.status === FETCH_STATUS.SUCCESS && (
           <ScrollView>
             {Object.keys(lookupCategories.data).map(slug => {
               const lookupCategory = lookupCategories.data[slug]
@@ -53,7 +47,7 @@ class Home extends React.PureComponent<null> {
               return <ItemGroupRow lookupCategory={lookupCategory} key={slug} />
             })}
           </ScrollView>
-          ) */}
+        )}
       </Container>
     )
   }

@@ -19,9 +19,9 @@ function contentCategories(state = initialContentCategoriesState, action) {
       return {
         ...state,
         status: FETCH_STATUS.LOADING,
-        slug: '',
+        slug: action.slug,
         error: '',
-        title: '',
+        title: action.name,
       }
     case ON_GET_CATEGORIES_SUCCESS:
       return {
@@ -29,7 +29,7 @@ function contentCategories(state = initialContentCategoriesState, action) {
         status: FETCH_STATUS.SUCCESS,
         error: '',
         data: action.data,
-        title: action.name,
+        title: action.title,
         slug: action.slug,
       }
     case ON_GET_CATEGORIES_FAIL:
@@ -38,29 +38,22 @@ function contentCategories(state = initialContentCategoriesState, action) {
         status: FETCH_STATUS.FAIL,
         data: [],
         error: action.error,
-        title: '',
-        slug: '',
+        title: action.title,
+        slug: action.slug,
       }
     default:
       return state
   }
 }
 
-const initialState = {
-  categories: {},
-}
-
-const CategoriesReducer = (state = initialState, action) => {
+const CategoriesReducer = (state = {}, action) => {
   switch (action.type) {
     case ON_GET_CATEGORIES_REQUEST:
     case ON_GET_CATEGORIES_SUCCESS:
     case ON_GET_CATEGORIES_FAIL:
       return {
         ...state,
-        categories: {
-          ...state.categories,
-          [action.id]: contentCategories(state[action.slug], action),
-        },
+        [action.slug]: contentCategories(state[action.slug], action),
       }
     default:
       return state
