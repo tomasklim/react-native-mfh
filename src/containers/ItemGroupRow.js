@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   view: {
     flexDirection: 'column',
     flex: 1,
-    height: 235,
+    height: 240,
   },
   column: {
     flex: 1,
@@ -51,8 +51,22 @@ class ItemGroupRow extends React.PureComponent<null> {
     onGetCategories(lookupCategory.id, lookupCategory.slug, lookupCategory.name)
   }
 
+  getData() {
+    const { category } = this.props
+    if (category.data.length <= 8) {
+      return category.data
+    }
+    const data = category.data.slice(0, 8)
+    data.push({
+      showMore: true,
+      title: 'Show more...',
+    })
+    return data
+  }
+
   render() {
     const { category } = this.props
+
     return (
       <View style={styles.view}>
         {category && category.status === FETCH_STATUS.SUCCESS && (
@@ -60,28 +74,34 @@ class ItemGroupRow extends React.PureComponent<null> {
             <Text style={styles.heading}>{category.title.toUpperCase()}</Text>
             <FlatList
               horizontal
-              data={category.data}
-              renderItem={({ item: rowData, index }) => (
+              data={this.getData()}
+              renderItem={({ item, index }) => (
                 <View styles={styles.column}>
                   <Image
-                    source={{
-                      uri: `${ARTWORK_URL}/${rowData.poster}_200x300.jpg`,
-                    }}
+                    source={
+                      item.showMore
+                        ? require('../themes/cover_poster.jpg')
+                        : {
+                            uri: `${ARTWORK_URL}/${item.poster}_200x300.jpg`,
+                          }
+                    }
                     style={[
                       styles.image,
                       !index && styles.firstColumn,
-                      index === category.data.length - 1 && styles.lastColumn,
+                      (index === category.data.length - 1 || index === 8) &&
+                        styles.lastColumn,
                     ]}
                   />
                   <Text
                     style={[
                       styles.text,
                       !index && styles.firstColumn,
-                      index === category.data.length - 1 && styles.lastColumn,
+                      (index === category.data.length - 1 || index === 8) &&
+                        styles.lastColumn,
                     ]}
                     numberOfLines={2}
                   >
-                    {rowData.title}
+                    {item.title}
                   </Text>
                 </View>
               )}
