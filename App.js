@@ -33,7 +33,13 @@ const store = createStore(
 )
 const persistor = persistStore(store)
 
-export default class App extends React.PureComponent<null> {
+type State = {
+  fontLoaded: boolean,
+}
+
+type Props = {}
+
+export default class App extends React.PureComponent<Props, State> {
   state = { fontLoaded: false }
 
   async componentDidMount() {

@@ -24,7 +24,7 @@ class Home extends React.PureComponent<null> {
   }
 
   render() {
-    const { lookupCategories } = this.props
+    const { lookupCategories, navigation } = this.props
     return (
       <Container>
         {lookupCategories.status === FETCH_STATUS.LOADING && (
@@ -44,7 +44,13 @@ class Home extends React.PureComponent<null> {
                 return null
               }
 
-              return <ItemGroupRow lookupCategory={lookupCategory} key={slug} />
+              return (
+                <ItemGroupRow
+                  lookupCategory={lookupCategory}
+                  key={slug}
+                  navigation={navigation}
+                />
+              )
             })}
           </ScrollView>
         )}

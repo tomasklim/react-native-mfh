@@ -1,5 +1,12 @@
 import React, { Fragment } from 'react'
-import { StyleSheet, Text, FlatList, View, Image } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  FlatList,
+  View,
+  Image,
+  TouchableHighlight,
+} from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Colors from '../themes/Colors'
@@ -65,7 +72,7 @@ class ItemGroupRow extends React.PureComponent<null> {
   }
 
   render() {
-    const { category } = this.props
+    const { category, navigation } = this.props
 
     return (
       <View style={styles.view}>
@@ -76,34 +83,42 @@ class ItemGroupRow extends React.PureComponent<null> {
               horizontal
               data={this.getData()}
               renderItem={({ item, index }) => (
-                <View styles={styles.column}>
-                  <Image
-                    source={
-                      item.showMore
-                        ? require('../themes/cover_poster.jpg')
-                        : {
-                            uri: `${ARTWORK_URL}/${item.poster}_200x300.jpg`,
-                          }
-                    }
-                    style={[
-                      styles.image,
-                      !index && styles.firstColumn,
-                      (index === category.data.length - 1 || index === 8) &&
-                        styles.lastColumn,
-                    ]}
-                  />
-                  <Text
-                    style={[
-                      styles.text,
-                      !index && styles.firstColumn,
-                      (index === category.data.length - 1 || index === 8) &&
-                        styles.lastColumn,
-                    ]}
-                    numberOfLines={2}
-                  >
-                    {item.title}
-                  </Text>
-                </View>
+                <TouchableHighlight
+                  onPress={() =>
+                    navigation.navigate('Details', {
+                      slug: item.slug,
+                    })
+                  }
+                >
+                  <View styles={styles.column}>
+                    <Image
+                      source={
+                        item.showMore
+                          ? require('../themes/cover_poster.jpg')
+                          : {
+                              uri: `${ARTWORK_URL}/${item.poster}_200x300.jpg`,
+                            }
+                      }
+                      style={[
+                        styles.image,
+                        !index && styles.firstColumn,
+                        (index === category.data.length - 1 || index === 8) &&
+                          styles.lastColumn,
+                      ]}
+                    />
+                    <Text
+                      style={[
+                        styles.text,
+                        !index && styles.firstColumn,
+                        (index === category.data.length - 1 || index === 8) &&
+                          styles.lastColumn,
+                      ]}
+                      numberOfLines={2}
+                    >
+                      {item.title}
+                    </Text>
+                  </View>
+                </TouchableHighlight>
               )}
               keyExtractor={(item, index) => index.toString()}
             />
