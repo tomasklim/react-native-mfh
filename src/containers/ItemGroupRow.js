@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
   view: {
     flexDirection: 'column',
     flex: 1,
-    height: 240,
+    height: 230,
+    marginTop: 10,
   },
   column: {
     flex: 1,
@@ -85,8 +86,9 @@ class ItemGroupRow extends React.PureComponent<null> {
               renderItem={({ item, index }) => (
                 <TouchableHighlight
                   onPress={() =>
-                    navigation.navigate('Details', {
+                    navigation.navigate('MovieDetail', {
                       slug: item.slug,
+                      title: item.title,
                     })
                   }
                 >

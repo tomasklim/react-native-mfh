@@ -3,11 +3,11 @@ import Home from '../Home'
 import TabNavigator from './TabNavigator'
 import Search from '../Search'
 import Menu from '../Menu'
-import Details from '../Details'
+import MovieDetail from '../MovieDetail'
 
 const HomeNavigator = createStackNavigator({
   Home,
-  Details,
+  MovieDetail,
 })
 
 const SearchNavigator = createStackNavigator({

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ActivityIndicator, ScrollView } from 'react-native'
+import { ActivityIndicator, ScrollView, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Colors from '../themes/Colors'
@@ -8,6 +8,12 @@ import { HeaderImage } from '../components'
 import ItemGroupRow from './ItemGroupRow'
 import { FETCH_STATUS } from '../constants/ActionConstants'
 import * as actions from '../state/actions'
+
+const styles = StyleSheet.create({
+  loader: {
+    marginTop: 10,
+  },
+})
 
 class Home extends React.PureComponent<null> {
   static navigationOptions = {
@@ -32,6 +38,7 @@ class Home extends React.PureComponent<null> {
             animating={lookupCategories.isFetching}
             size="large"
             color={Colors.purpleInactive}
+            style={styles.loader}
           />
         )}
 
